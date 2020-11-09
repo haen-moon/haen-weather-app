@@ -14,69 +14,104 @@
       src="https://kit.fontawesome.com/faa93fb3be.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="weather-app">
-        <h1>Today's Weather</h1>
-        <p>Yio Chu Kang, Singapore</p>
-        <div class="row">
-          <div class="col-6">
-            <i class="fas fa-cloud-sun"></i>
-          </div>
-          <div class="col-6">
-            <ul>
-              <li>Cloudy</li>
-              <li>28ºC</li>
-              <li>Feels like 32ºC</li>
-            </ul>
+    <div class="weather-app">
+      <div class="container">
+        <div class="content">
+          <div class="card">
+            <div class="today-weather">
+              <img
+                class="icon-animated"
+                src="src/img/cloudy-day-3.svg"
+                alt=""
+              />
+              <div class="weather-area">
+                <strong class="current">
+                  <span class="blind"></span>
+                  2.8
+                  <span class="degree">º</span>
+                </strong>
+                <p class="summary">Overcast clouds</p>
+                <dl class="summary-list">
+                  <dt class="term-feeling">Feeling</dt>
+                  <dd class="desc-feeling">2.3º</dd>
+                  <dt class="term-precip">Precipitation</dt>
+                  <dd class="desc-precip">0 %</dd>
+                </dl>
+                <dl class="summary-list">
+                  <dt class="term-wind">Wind</dt>
+                  <dd class="desc-wind">1m/s (west)</dd>
+                  <dt class="term-humidity">Humidity</dt>
+                  <dd class="desc-humidity">94%</dd>
+                </dl>
+              </div>
+              <div class="chart-control">
+                <div class="chart-area">
+                  <ul class="chart-list">
+                    <li class="item-today sunrise">
+                      <div class="item-inner">
+                        <div class="ttl-area">
+                          <strong class="ttl">Sunrise</strong>
+                          <em class="level-text">07:04</em>
+                        </div>
+                        <img
+                          class="chart-area-image"
+                          src="https://icons-for-free.com/iconfiles/png/128/horizon+rise+shine+sun+weather+icon-1320183302345348713.png"
+                          alt="sunrise-image"
+                        />
+                      </div>
+                    </li>
+                    <li class="item-today sunset">
+                      <div class="item-inner">
+                        <div class="ttl-area">
+                          <strong class="ttl">Sunset</strong>
+                          <em class="level-text">16:23</em>
+                        </div>
+                        <img
+                          src="https://icons-for-free.com/iconfiles/png/128/forecast+horizon+set+shine+sun+weather+icon-1320183301614463263.png"
+                          alt="senset-image"
+                          class="chart-area-image"
+                        />
+                      </div>
+                    </li>
+                    <li class="item-today uvindex">
+                      <div class="item-inner">
+                        <div class="ttl-area">
+                          <strong class="ttl">UV Index</strong>
+                          <em class="level-text">Low (2.67)</em>
+                        </div>
+                        <img
+                          src="https://icons-for-free.com/iconfiles/png/512/day+glasses+sun+sunshine+weather+icon-1320183295339277932.png"
+                          alt="uv-image"
+                          class="chart-area-image"
+                        />
+                      </div>
+                    </li>
+                    <li class="item-today airquality">
+                      <div class="item-inner">
+                        <div class="ttl-area">
+                          <strong class="ttl">Air Quality</strong>
+                          <em class="level-text">Unhealthy (175)</em>
+                        </div>
+                        <img
+                          src="https://icons-for-free.com/iconfiles/png/128/forecast+weather+wind+icon-1320183301899652671.png"
+                          alt="air-image"
+                          class="chart-area-image"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-3">
-            <ul>
-              <li>Humidity</li>
-              <li>
-                <i class="fas fa-tint"></i>
-              </li>
-              <li>73%</li>
-            </ul>
-          </div>
-          <div class="col-3">
-            <ul>
-              <li>Wind</li>
-              <li>
-                <i class="fas fa-wind"></i>
-              </li>
-              <li>2.1 km/h</li>
-            </ul>
-          </div>
-          <div class="col-3">
-            <ul>
-              <li>smog</li>
-              <li>
-                <i class="fas fa-smog"></i>
-              </li>
-              <li>Okay</li>
-            </ul>
-          </div>
-          <div class="col-3">
-            <ul>
-              <li>Precipitaion</li>
-              <li>
-                <i class="fas fa-tint"></i>
-              </li>
-              <li>80%</li>
-            </ul>
-          </div>
-        </div>
-        <small
-          ><a href="https://github.com/haen-moon/weather-app" target="_blank"
-            >Open-sourced code,</a
-          >
-          by Haen Moon</small
-        >
       </div>
     </div>
   </body>
