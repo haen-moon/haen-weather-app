@@ -325,3 +325,12 @@ em {
   line-height: 15px;
   white-space: nowrap;
 }
+
+.footnote {
+  margin-top: -3px;
+  font-size: 14px;
+  font-weight: 400px;
+  line-height: 31px;
+  letter-spacing: -1px;
+  color: #424242;
+}
