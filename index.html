@@ -34,8 +34,9 @@
           <div class="card">
             <div class="today-weather">
               <div class="location">
-                <p id="city-name" class="city-name">
-                  <button id="loca tion-button">
+                <p class="city-name">
+                  <strong id="city-name"></strong>
+                  <button id="location-button">
                     <i class="fas fa-map-marker-alt"></i>
                   </button>
                 </p>
@@ -50,18 +51,18 @@
                   <span id="temperature" class="blind"></span>
                   <span class="degree">º</span>
                 </strong>
-                <p class="summary">Overcast clouds</p>
+                <p id="weather-description" class="summary"></p>
                 <dl class="summary-list">
                   <dt class="term-feeling">Feeling</dt>
-                  <dd class="desc-feeling">2.3º</dd>
+                  <dd id="app-temp" class="desc-feeling"></dd>
                   <dt class="term-precip">Precipitation</dt>
-                  <dd class="desc-precip">0 %</dd>
+                  <dd id="precip" class="desc-precip"></dd>
                 </dl>
                 <dl class="summary-list">
                   <dt class="term-wind">Wind</dt>
-                  <dd class="desc-wind">1m/s (west)</dd>
+                  <dd id="wind-spd" class="desc-wind"></dd>
                   <dt class="term-humidity">Humidity</dt>
-                  <dd class="desc-humidity">94%</dd>
+                  <dd id="humidity" class="desc-humidity"></dd>
                 </dl>
               </div>
               <div class="chart-control">
@@ -71,7 +72,7 @@
                       <div class="item-inner">
                         <div class="ttl-area">
                           <strong class="ttl">Sunrise</strong>
-                          <em class="level-text">07:04</em>
+                          <em id="sunrise" class="level-text"></em>
                         </div>
                         <img
                           class="chart-area-image"
@@ -84,7 +85,7 @@
                       <div class="item-inner">
                         <div class="ttl-area">
                           <strong class="ttl">Sunset</strong>
-                          <em class="level-text">16:23</em>
+                          <em id="sunset" class="level-text"></em>
                         </div>
                         <img
                           src="https://icons-for-free.com/iconfiles/png/128/forecast+horizon+set+shine+sun+weather+icon-1320183301614463263.png"
@@ -97,7 +98,7 @@
                       <div class="item-inner">
                         <div class="ttl-area">
                           <strong class="ttl">UV Index</strong>
-                          <em class="level-text">Low (2.67)</em>
+                          <em id="uv" class="level-text"></em>
                         </div>
                         <img
                           src="https://icons-for-free.com/iconfiles/png/512/day+glasses+sun+sunshine+weather+icon-1320183295339277932.png"
@@ -110,7 +111,7 @@
                       <div class="item-inner">
                         <div class="ttl-area">
                           <strong class="ttl">Air Quality</strong>
-                          <em class="level-text">Unhealthy (175)</em>
+                          <em id="air-quality" class="level-text"></em>
                         </div>
                         <img
                           src="https://icons-for-free.com/iconfiles/png/128/forecast+weather+wind+icon-1320183301899652671.png"
