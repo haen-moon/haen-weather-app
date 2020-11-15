@@ -1,5 +1,49 @@
+function getDayOfWeek(date) {
+  let dayOfWeek = new Date(date).getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[dayOfWeek];
+}
+
+function getIconFileName(code, icon) {
+  if (code.substring(0, 2) == "20") {
+    svg_file = "thunder-w-rain";
+  } else if (code.substring(0, 2) == "23") {
+    svg_file = "thunder";
+  } else if (
+    code.substring(0, 1) == "3" ||
+    code.substring(0, 1) == "5" ||
+    code.substring(0, 1) == "9"
+  ) {
+    svg_file = "rain";
+  } else if (code.substring(0, 1) == "6") {
+    svg_file = "snow";
+  } else if (
+    code.substring(0, 1) == "7" &&
+    icon.substring(icon.length - 1) == "d"
+  ) {
+    svg_file = "foggy-d";
+  } else if (
+    code.substring(0, 1) == "7" &&
+    icon.substring(icon.length - 1) == "n"
+  ) {
+    svg_file = "foggy-n";
+  } else if (
+    code.substring(0, 3) == "800" &&
+    icon.substring(icon.length - 1) == "d"
+  ) {
+    svg_file = "clear-d";
+  } else if (
+    code.substring(0, 3) == "800" &&
+    icon.substring(icon.length - 1) == "n"
+  ) {
+    svg_file = "clear-n";
+  } else {
+    svg_file = "cloud";
+  }
+  return svg_file;
+}
+
 function displayTemperature(response) {
-  console.log(response.data.data[0]);
   let cityNameElement = document.querySelector("#city-name");
   let iconElement = document.querySelector("#icon");
   let temperatureElement = document.querySelector("#temperature");
@@ -14,8 +58,7 @@ function displayTemperature(response) {
   let airQualityElement = document.querySelector("#air-quality");
   let code = response.data.data[0].weather.code.toString();
   let icon = response.data.data[0].weather.icon.toString();
-  let dayNight = icon.substring(icon.length - 1);
-  let svg_file = "";
+  let svgFile = "";
   let uvIndex = Math.round((response.data.data[0].uv * 100) / 100);
   let uvDesc = "";
   let airIndex = response.data.data[0].aqi;
@@ -25,30 +68,8 @@ function displayTemperature(response) {
 
   cityNameElement.innerHTML = response.data.data[0].city_name;
 
-  if (code.substring(0, 2) == "20") {
-    svg_file = "thunder-w-rain";
-  } else if (code.substring(0, 2) == "23") {
-    svg_file = "thunder";
-  } else if (
-    code.substring(0, 1) == "3" ||
-    code.substring(0, 1) == "5" ||
-    code.substring(0, 1) == "9"
-  ) {
-    svg_file = "rain";
-  } else if (code.substring(0, 1) == "6") {
-    svg_file = "snow";
-  } else if (code.substring(0, 1) == "7" && dayNight == "d") {
-    svg_file = "foggy-d";
-  } else if (code.substring(0, 1) == "7" && dayNight == "n") {
-    svg_file = "foggy-n";
-  } else if (code.substring(0, 3) == "800" && dayNight == "d") {
-    svg_file = "clear-d";
-  } else if (code.substring(0, 3) == "800" && dayNight == "n") {
-    svg_file = "clear-n";
-  } else {
-    svg_file = "cloud";
-  }
-  iconElement.setAttribute("src", `src/img/${svg_file}.svg`);
+  svgFile = getIconFileName(code, icon);
+  iconElement.setAttribute("src", `src/img/${svgFile}.svg`);
 
   temperatureElement.innerHTML = Math.round(response.data.data[0].temp);
   weatherDescription.innerHTML = response.data.data[0].weather.description;
@@ -98,11 +119,47 @@ function displayTemperature(response) {
   airQualityElement.innerHTML = airDesc;
 }
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+  let forecastSvgFile = null;
+  let date = null;
+  let forecastCode = null;
+  let forecastIcon = null;
+
+  for (let index = 1; index < 7; index++) {
+    forecast = response.data.data[index];
+    forecastCode = response.data.data[index].weather.code.toString();
+    forecastIcon = response.data.data[index].weather.icon.toString();
+    forecastSvgFile = getIconFileName(forecastCode, forecastIcon);
+    date = response.data.data[index].valid_date;
+
+    forecastElement.innerHTML += `
+      <div class="col-2">
+        <div class="weekday">${getDayOfWeek(date)}</div>
+        <img
+          src="src/img/${forecastSvgFile}.svg"
+          alt=""
+        />
+        <div class="weather-forecast-temperature">
+          <strong>${Math.round(forecast.max_temp)}°</strong> / ${Math.round(
+      forecast.min_temp
+    )}°
+        </div>
+      </div>
+    `;
+  }
+}
+
 function search(city) {
   let apiKey = "6e11116e2ea242a49ab7f53ad3ff5ae4";
   let units = "M";
   let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${city}&key=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayTemperature);
+
+  apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function handleSubmit(event) {
