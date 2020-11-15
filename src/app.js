@@ -1,3 +1,4 @@
+
 function displayTemperature(response){
   console.log(response.data);
   console.log(response.data.data[0].temp);
@@ -27,11 +28,11 @@ function displayTemperature(response){
   precipElement.innerHTML = `${response.data.data[0].precip}%`;
   windSpdElement.innerHTML = `${response.data.data[0].wind_spd}m/s (${response.data.data[0].wind_cdir_full})`;
   humidityElement.innerHTML = `${response.data.data[0].rh}%`;
-
-  sunriseElement.innerHTML = response.data.data[0].sunrise;
-  sunsetElement.innerHTML = response.data.data[0].sunset;
   
-  let uvIndex = response.data.data[0].uv
+  sunriseElement.innerHTML = new Date (`01/01/1970 ${response.data.data[0].sunrise} UTC`).toLocaleString("en-US", {timeStyle: "short", timeZone:`${response.data.data[0].timezone}`});
+  sunsetElement.innerHTML = new Date(`01/01/1970 ${response.data.data[0].sunset} UTC`).toLocaleString("en-US", {timeStyle: "short", timeZone:`${response.data.data[0].timezone}`});
+  
+  let uvIndex = Math.round(response.data.data[0].uv*100/100)
   let uvDesc =""
 
   if (uvIndex>=11) {
@@ -71,7 +72,7 @@ function displayTemperature(response){
 
 apiKey ="6e11116e2ea242a49ab7f53ad3ff5ae4"
 units = 'M'
-apiUrl = `https://api.weatherbit.io/v2.0/current?city=Singapore&key=${apiKey}&units=${units}`
+apiUrl = `https://api.weatherbit.io/v2.0/current?city=Seoul&key=${apiKey}&units=${units}`
 
 console.log(apiUrl)
 
