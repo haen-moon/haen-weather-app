@@ -158,11 +158,20 @@ em {
 }
 
 .degree {
-  font-size: 46px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 59px;
   letter-spacing: -1.08px;
   vertical-align: top;
+}
+
+.weather-area .active {
+  color: black;
+  cursor: default;
+}
+
+.weather-area .active:hover {
+  text-decoration: none;
 }
 
 .summary {

@@ -4,23 +4,26 @@ function displayTemperature(response) {
   let iconElement = document.querySelector("#icon");
   let temperatureElement = document.querySelector("#temperature");
   let weatherDescription = document.querySelector("#weather-description");
-
   let appTempElement = document.querySelector("#app-temp");
   let precipElement = document.querySelector("#precip");
   let windSpdElement = document.querySelector("#wind-spd");
   let humidityElement = document.querySelector("#humidity");
-
   let sunriseElement = document.querySelector("#sunrise");
   let sunsetElement = document.querySelector("#sunset");
   let uvElement = document.querySelector("#uv");
   let airQualityElement = document.querySelector("#air-quality");
-
-  cityNameElement.innerHTML = response.data.data[0].city_name;
-
   let code = response.data.data[0].weather.code.toString();
   let icon = response.data.data[0].weather.icon.toString();
   let dayNight = icon.substring(icon.length - 1);
   let svg_file = "";
+  let uvIndex = Math.round((response.data.data[0].uv * 100) / 100);
+  let uvDesc = "";
+  let airIndex = response.data.data[0].aqi;
+  let airDesc = "";
+
+  celsiusTemp = response.data.data[0].temp;
+
+  cityNameElement.innerHTML = response.data.data[0].city_name;
 
   if (code.substring(0, 2) == "20") {
     svg_file = "thunder-w-rain";
@@ -68,9 +71,6 @@ function displayTemperature(response) {
     timeZone: `${response.data.data[0].timezone}`,
   });
 
-  let uvIndex = Math.round((response.data.data[0].uv * 100) / 100);
-  let uvDesc = "";
-
   if (uvIndex >= 11) {
     uvDesc = `Extreme (${uvIndex})`;
   } else if (uvIndex >= 8 && uvIndex < 11) {
@@ -83,9 +83,6 @@ function displayTemperature(response) {
     uvDesc = `Low (${uvIndex})`;
   }
   uvElement.innerHTML = uvDesc;
-
-  let airIndex = response.data.data[0].aqi;
-  let airDesc = "";
 
   if (airIndex >= 301) {
     airDesc = `Hazardous (${airIndex})`;
@@ -113,7 +110,33 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
 }
+
+function displayFarenheitTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.remove("active");
+  farenheitLink.classList.add("active");
+  let farenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(farenheitTemp);
+}
+
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.add("active");
+  farenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
+}
+
 search("New York");
+
+let celsiusTemp = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let farenheitLink = document.querySelector("#farenheit-link");
+farenheitLink.addEventListener("click", displayFarenheitTemp);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
