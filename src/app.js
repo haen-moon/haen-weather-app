@@ -1,6 +1,5 @@
 function displayTemperature(response) {
-  console.log(response.data);
-  console.log(response.data.data[0].temp);
+  console.log(response.data.data[0]);
   let cityNameElement = document.querySelector("#city-name");
   let iconElement = document.querySelector("#icon");
   let temperatureElement = document.querySelector("#temperature");
@@ -47,8 +46,6 @@ function displayTemperature(response) {
     svg_file = "cloud";
   }
   iconElement.setAttribute("src", `src/img/${svg_file}.svg`);
-  console.log(code);
-  console.log(dayNight);
 
   temperatureElement.innerHTML = Math.round(response.data.data[0].temp);
   weatherDescription.innerHTML = response.data.data[0].weather.description;
@@ -104,11 +101,19 @@ function displayTemperature(response) {
   airQualityElement.innerHTML = airDesc;
 }
 
-let apiKey = "6e11116e2ea242a49ab7f53ad3ff5ae4";
-let units = "M";
-let city = "Singapore";
-let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${city}&key=${apiKey}&units=${units}`;
+function search(city) {
+  let apiKey = "6e11116e2ea242a49ab7f53ad3ff5ae4";
+  let units = "M";
+  let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${city}&key=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayTemperature);
+}
 
-console.log(apiUrl);
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+search("New York");
 
-axios.get(apiUrl).then(displayTemperature);
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
