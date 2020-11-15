@@ -48,7 +48,7 @@ em {
 }
 
 .container {
-  padding-top: 113px;
+  padding-top: 50px;
   position: relative;
   width: 100%;
   max-width: none;
@@ -59,6 +59,37 @@ em {
   box-sizing: border-box;
   position: relative;
   width: 100%;
+}
+
+.search {
+  margin-bottom: 10px;
+  transform: translateY(-50%);
+}
+
+.search-input {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  background-color: #fff;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: #e6ebef;
+  border-radius: 12px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+#submit-button {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  color: #2196f3;
+  border: 0;
+  background-color: #fff;
+  cursor: pointer;
 }
 
 .card {
@@ -72,6 +103,28 @@ em {
   background-color: #fff;
   box-sizing: border-box;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.03);
+}
+
+.city-name {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 31px;
+  letter-spacing: -1px;
+  color: #424242;
+}
+
+#location-button {
+  top: 2px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  color: #ed553b;
+  border: 0;
+  background-color: #fff;
+  cursor: pointer;
+  text-shadow: 0px 7px 3px rgba(0, 0, 0, 0.2);
 }
 
 .today-weather {
@@ -196,7 +249,7 @@ em {
   overflow: hidden;
   margin-right: 45px;
   font-size: 15px;
-  color: #424242;
+  color: #fff;
   line-height: 22px;
   letter-spacing: -0.5px;
 }
@@ -206,27 +259,31 @@ em {
   white-space: nowrap;
 }
 
+.item-today.sunrise .ttl,
+.item-today.sunrise .level-text {
+  color: #000;
+}
 .level-text {
   display: block;
   font-weight: 700px;
 }
 
 .item-today.sunrise {
-  background-color: #fcedbe;
+  background-color: #f6d55c;
   margin-left: 48px;
 }
 
 .item-today.sunset {
-  background-color: #f5d5c6;
+  background-color: #ed553b;
   margin-left: 8px;
 }
 
 .item-today.uvindex {
-  background-color: #c7dcc5;
+  background-color: #3caea3;
   margin-left: 8px;
 }
 
 .item-today.airquality {
-  background-color: #cfeaea;
+  background-color: #20639b;
   margin-left: 8px;
 }

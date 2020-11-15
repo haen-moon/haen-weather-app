@@ -14,6 +14,7 @@
       src="https://kit.fontawesome.com/faa93fb3be.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
@@ -24,8 +25,21 @@
     <div class="weather-app">
       <div class="container">
         <div class="content">
+          <div class="search">
+            <input type="text" class="search-input" placeholder="Search City" />
+            <button id="submit-button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
           <div class="card">
             <div class="today-weather">
+              <div class="location">
+                <p id="city-name" class="city-name">
+                  <button id="loca tion-button">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </button>
+                </p>
+              </div>
               <img
                 class="icon-animated"
                 src="src/img/cloudy-day-3.svg"
@@ -33,8 +47,7 @@
               />
               <div class="weather-area">
                 <strong class="current">
-                  <span class="blind"></span>
-                  2.8
+                  <span id="temperature" class="blind"></span>
                   <span class="degree">º</span>
                 </strong>
                 <p class="summary">Overcast clouds</p>
@@ -115,4 +128,5 @@
       </div>
     </div>
   </body>
+  <script src="src/app.js"></script>
 </html>
