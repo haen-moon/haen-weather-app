@@ -43,6 +43,20 @@ function getIconFileName(code, icon) {
   return svg_file;
 }
 
+function convertTimeZone(utcTimeString, timezone) {
+  let utcTime = luxon.DateTime.utc(
+    2020,
+    1,
+    1,
+    parseInt(utcTimeString.substring(0, 2)),
+    parseInt(utcTimeString.substring(3, 5))
+  );
+
+  let localTime = utcTime.setZone(timezone);
+  let localTimeString = localTime.toISOTime().substring(0, 5);
+  return localTimeString;
+}
+
 function displayTemperature(response) {
   let cityNameElement = document.querySelector("#city-name");
   let iconElement = document.querySelector("#icon");
@@ -63,6 +77,9 @@ function displayTemperature(response) {
   let uvDesc = "";
   let airIndex = response.data.data[0].aqi;
   let airDesc = "";
+  let sunrise = response.data.data[0].sunrise;
+  let sunset = response.data.data[0].sunset;
+  let timezone = response.data.data[0].timezone;
 
   celsiusTemp = response.data.data[0].temp;
 
@@ -79,18 +96,8 @@ function displayTemperature(response) {
   windSpdElement.innerHTML = `${response.data.data[0].wind_spd}m/s (${response.data.data[0].wind_cdir_full})`;
   humidityElement.innerHTML = `${response.data.data[0].rh}%`;
 
-  sunriseElement.innerHTML = new Date(
-    `01/01/1970 ${response.data.data[0].sunrise} UTC`
-  ).toLocaleString("en-US", {
-    timeStyle: "short",
-    timeZone: `${response.data.data[0].timezone}`,
-  });
-  sunsetElement.innerHTML = new Date(
-    `01/01/1970 ${response.data.data[0].sunset} UTC`
-  ).toLocaleString("en-US", {
-    timeStyle: "short",
-    timeZone: `${response.data.data[0].timezone}`,
-  });
+  sunriseElement.innerHTML = convertTimeZone(sunrise, timezone);
+  sunsetElement.innerHTML = convertTimeZone(sunset, timezone);
 
   if (uvIndex >= 11) {
     uvDesc = `Extreme (${uvIndex})`;
